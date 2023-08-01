@@ -13,41 +13,39 @@
     <h1>Lista de filmes</h1>
     <a href="/filmes/formulario">Novo</a>
 
+<table>
+    <thead>
+    <tr>
+        <th>NOME</th>
+        <th>DURAÇÃO</th>
+        <th>ANO DE LANÇAMENTO</th>
+        <th>GÊNERO</th>
+        <th>AÇÕES</th>
+    </tr>
+    </thead>
 
-        <thead>
-        <tr>
-            <th>NOME</th>
-            <th>DURAÇÃO</th>
-            <th>ANO DE LANÇAMENTO</th>
-            <th>GÊNERO</th>
-            <th>AÇÕES</th>
-        </tr>
-        </thead>
+    <tbody>
 
-        <tbody>
+    <tr th:each="filme : ${lista}">
+        <td th:text="${filme.nomeFilme}"></td>
+        <td th:text="${filme.duracaoFilme}"></td>
+        <td th:text="${filme.anoLancamento}"></td>
+        <td th:text="${filme.generoFilme}"></td>
+        <td>
+            <a th:href="@{/filmes/formulario?id={id}(id=${filme.id})}">Editar</a>
 
-        <tr th:each="filme : ${lista}">
-            <td th:text="${filme.nomeFilme}"></td>
-            <td th:text="${filme.duracaoFilme}"></td>
-            <td th:text="${filme.anoLancamento}"></td>
-            <td th:text="${filme.generoFilme}"></td>
-            <td>
-                <a th:href="@{/filmes/formulario?id={id}(id=${filme.id})}">Editar</a>
+            <form action="/filmes" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="id" th:value="${filme.id}">
+                <input type="submit" value="Excluir" icon="bin">
+            </form>
+        </td>
+    </tr>
 
-                <form action="/filmes" method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="id" th:value="${filme.id}">
-                    <input type="submit" value="Excluir" icon="bin">
-                </form>
-            </td>
-        </tr>
+   <!-- <input type="submit" value="Voltar para formulário"> -->
 
-        <input type="submit" value="Voltar para formulário">
-
-        </tbody>
+    </tbody>
     </table>
-
-    <input type="submit" value="Voltar para formulário">
 </div>
 </body>
 </html>
